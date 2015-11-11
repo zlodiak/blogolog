@@ -1,7 +1,5 @@
 class CreateMessages < ActiveRecord::Migration
-  def change
-    drop_table :messages
-    
+  def change  
     create_table :messages do |t|
       t.string :author_anon
       t.integer :author_user
