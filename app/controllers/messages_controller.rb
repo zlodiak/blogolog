@@ -23,6 +23,7 @@ class MessagesController < ApplicationController
 
   # POST /messages
   # POST /messages.json
+=begin
   def create
     @message = Message.new(message_params)
 
@@ -36,6 +37,14 @@ class MessagesController < ApplicationController
       end
     end
   end
+=end
+
+
+  def create
+    p '----------- deliver now'
+    ReviewMailer.welcome_email().deliver_now
+    render :index
+  end   
 
   # PATCH/PUT /messages/1
   # PATCH/PUT /messages/1.json
