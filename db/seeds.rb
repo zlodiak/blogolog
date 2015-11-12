@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-
+# users
 User.create!(   
   email: "ad@ad.ad",
   password: 'qwertyui',
@@ -20,6 +20,16 @@ User.create!(
     email: "us#{n+1}@ad.ad",
     password: 'qwertyui',
     password_confirmation: 'qwertyui'   
+  ) 
+end
+
+# messages
+35.times do |n|
+  Message.create!(   
+    anon_author_name: Faker::Name.name,
+    email: Faker::Internet.email,
+    title: Faker::Name.title,
+    body: Faker::Lorem.paragraph(2) 
   ) 
 end
 
