@@ -1,9 +1,7 @@
-class PostsController < InheritedResources::Base
+class PostsController < ApplicationController
+  def title:string
+  end
 
-  private
-
-    def post_params
-      params.require(:post).permit(:title, :body)
-    end
+  def body:text
+  end
 end
-

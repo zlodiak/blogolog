@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'posts/title:string'
+
+  get 'posts/body:text'
+
   resources :posts
   ActiveAdmin.routes(self)
   devise_for :users
