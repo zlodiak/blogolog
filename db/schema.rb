@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111180617) do
+ActiveRecord::Schema.define(version: 20151112074632) do
 
   create_table "messages", force: :cascade do |t|
-    t.string   "author_anon"
-    t.integer  "author_user"
+    t.string   "anon_author_name"
+    t.integer  "user_author_id"
     t.string   "title"
     t.text     "body"
     t.string   "email"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "pictures", force: :cascade do |t|

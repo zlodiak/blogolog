@@ -22,19 +22,20 @@ class MessagesController < ApplicationController
   end
 
   # POST /messages
-  # POST /messages.json
   def create
     @message = Message.new(message_params)
 
-    respond_to do |format|
-      if @message.save
-        MessageMailer.message_email(@message).deliver_now
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render :show, status: :created, location: @message }
-      else
-        format.html { render :new }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
+    if user_signed_in?
+      @message.anon_author_name = nil
+      @message.user_author_id = current_user.id
+      @message.email = current_user.email
+    end
+
+    if @message.save
+      MessageMailer.message_email(@message).deliver_now
+      redirect_to new_message_path, notice: 'Сообщение отправлено'
+    else
+      render :new
     end
   end
 
@@ -70,6 +71,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:author_anon, :author_user, :title, :body, :email)
+      params.require(:message).permit(:anon_author_name, :title, :body, :email)
     end
 end

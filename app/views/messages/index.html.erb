@@ -17,8 +17,8 @@
   <tbody>
     <% @messages.each do |message| %>
       <tr>
-        <td><%= message.author_anon %></td>
-        <td><%= message.author_user %></td>
+        <td><%= message.anon_author_name %></td>
+        <td><%= message.user_author_id %></td>
         <td><%= message.title %></td>
         <td><%= message.body %></td>
         <td><%= message.email %></td>
