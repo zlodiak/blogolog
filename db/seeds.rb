@@ -7,24 +7,34 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-# users
-User.create!(   
-  email: "ad@ad.ad",
-  password: 'qwertyui',
-  password_confirmation: 'qwertyui', 
-  superadmin: true
-) 
+all_users = []
 
-3.times do |n|
-  User.create!(   
-    email: "us#{n+1}@ad.ad",
-    password: 'qwertyui',
-    password_confirmation: 'qwertyui'   
-  ) 
+# admin user
+admin = User.create!(   
+          email: "ad@ad.ad",
+          password: 'qwertyui',
+          password_confirmation: 'qwertyui', 
+          superadmin: true
+        ) 
+all_users.push admin
+
+# regular user
+users_quantity = 3
+
+users_quantity.times do |n|
+  regular = User.create!(   
+              email: "us#{n+1}@ad.ad",
+              password: 'qwertyui',
+              password_confirmation: 'qwertyui'   
+            ) 
+
+  all_users.push regular
 end
 
 # messages
-35.times do |n|
+messages_quantity = 35
+
+messages_quantity.times do |n|
   Message.create!(   
     anon_author_name: Faker::Name.name,
     email: Faker::Internet.email,
@@ -33,3 +43,20 @@ end
   ) 
 end
 
+# post_statuses fill
+PostStatus.create!(id: 1, title: 'open') 
+PostStatus.create!(id: 2, title: 'closed') 
+
+# posts
+all_users.each do |user|
+  user_post_quantity = rand(1..15)
+
+  user_post_quantity.times do |n|
+    Post.create!(   
+      title: Faker::Name.title,
+      body: Faker::Lorem.paragraph(20),
+      post_status_id: rand(1..2),
+      user_id: user.id
+    )   
+  end
+end

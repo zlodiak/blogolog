@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+  resources :posts
   ActiveAdmin.routes(self)
   devise_for :users
   resources :messages, only: [:new, :create]
   resources :pictures
   resources :tags
-  resources :posts
   get 'main/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
