@@ -9,11 +9,20 @@
 
 all_users = []
 
+# user_statuses fill
+UserStatus.create!(id: 1, title: 'active') 
+UserStatus.create!(id: 2, title: 'blocked') 
+
+# post_statuses fill
+PostStatus.create!(id: 1, title: 'open') 
+PostStatus.create!(id: 2, title: 'closed') 
+
 # admin user
 admin = User.create!(   
           email: "ad@ad.ad",
           password: 'qwertyui',
           password_confirmation: 'qwertyui', 
+          user_status_id: 1,          
           superadmin: true
         ) 
 all_users.push admin
@@ -25,7 +34,8 @@ users_quantity.times do |n|
   regular = User.create!(   
               email: "us#{n+1}@ad.ad",
               password: 'qwertyui',
-              password_confirmation: 'qwertyui'   
+              user_status_id: 1,
+              password_confirmation: 'qwertyui'
             ) 
 
   all_users.push regular
@@ -43,10 +53,6 @@ messages_quantity.times do |n|
   ) 
 end
 
-# post_statuses fill
-PostStatus.create!(id: 1, title: 'open') 
-PostStatus.create!(id: 2, title: 'closed') 
-
 # posts
 all_users.each do |user|
   user_post_quantity = rand(1..15)
@@ -60,3 +66,4 @@ all_users.each do |user|
     )   
   end
 end
+
