@@ -1,3 +1,16 @@
-1212121
+Имя:<br />
+<% if @message.user_author_id %>
+  <%= @message.user_author_id %>
+<% else %>
+  <%= @message.anon_author_name %>
+<% end %>
+<br /><br />
+Тема:<br />
+<%= @message.title %>
+<br /><br />
+Сообщение:<br />
 <%= @message.body %>
-3434343
+<br /><br />
+Email:<br />
+<%= @message.email %>
+<br /><br />
