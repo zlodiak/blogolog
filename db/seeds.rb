@@ -7,24 +7,18 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-=begin
+
 User.create!(   
   email: "ad@ad.ad",
   password: 'qwertyui',
   password_confirmation: 'qwertyui'
-  confirmed_at: '2015-10-19 14:00:28.327015'
-  confirmation_sent_at: '2015-10-19 14:00:28.327015'
-  confirmation_token: 'ddgdgfdfgdgdgdg'
 ) 
 
 3.times do |n|
   User.create!(   
     email: "us#{n+1}@ad.ad",
     password: 'qwertyui',
-    password_confirmation: 'qwertyui'
-    confirmed_at: '2015-10-19 14:00:28.327015'
-    confirmation_sent_at: '2015-10-19 14:00:28.327015'
-    confirmation_token: 'ddgdgfdfgdgdgdg'    
+    password_confirmation: 'qwertyui'   
   ) 
 end
-=end
+

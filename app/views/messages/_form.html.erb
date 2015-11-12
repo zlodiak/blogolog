@@ -11,26 +11,30 @@
     </div>
   <% end %>
 
+  <% unless user_signed_in? %>
+    <div class="field">
+      <%= f.label :Имя %><br>
+      <%= f.text_field :author_anon %>
+    </div>
+  <% end %>
+
   <div class="field">
-    <%= f.label :author_anon %><br>
-    <%= f.text_field :author_anon %>
-  </div>
-  <div class="field">
-    <%= f.label :author_user %><br>
-    <%= f.number_field :author_user %>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :Тема %><br>
     <%= f.text_field :title %>
   </div>
+
   <div class="field">
-    <%= f.label :body %><br>
+    <%= f.label :Сообщение %><br>
     <%= f.text_area :body %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
+
+  <% unless user_signed_in? %>
+    <div class="field">
+      <%= f.label :email %><br>
+      <%= f.text_field :email %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
