@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  devise_for :users
   resources :messages, only: [:new, :create]
   resources :pictures
   resources :tags
