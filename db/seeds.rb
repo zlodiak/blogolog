@@ -11,7 +11,8 @@
 User.create!(   
   email: "ad@ad.ad",
   password: 'qwertyui',
-  password_confirmation: 'qwertyui'
+  password_confirmation: 'qwertyui', 
+  superadmin: true
 ) 
 
 3.times do |n|
