@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :posts
+  
   ActiveAdmin.routes(self)
   devise_for :users
   resources :messages, only: [:new, :create]
@@ -7,6 +7,13 @@ Rails.application.routes.draw do
   resources :tags
   get 'main/index'
   get 'post/like_change'
+  get 'all_posts' => 'posts#all_posts'#, as: 'all_posts'
+  #match 'all_posts', to: 'posts#all_posts', via: :get
+
+  resources :users do
+    resources :posts
+
+  end  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -3,7 +3,7 @@ class PostsController < InheritedResources::Base
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
 
   def index
-    @posts = Post.paginate(page: params[:page], :per_page => 10)
+    @posts = Post.where(id: params[:id]).paginate(page: params[:page], :per_page => 10)
   end
 
   def show
@@ -58,6 +58,10 @@ class PostsController < InheritedResources::Base
 
   def like_change
 
+  end
+
+  def all_posts
+    @posts = Post.paginate(page: params[:page], :per_page => 10)
   end
 
   private
