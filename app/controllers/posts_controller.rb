@@ -10,11 +10,11 @@ class PostsController < InheritedResources::Base
     @likes_count = PostLike.where(post_id: @post.id).count
     
     if PostLike.where(user_id: current_user.id, post_id: @post.id).count > 0
-      @already_vote_flag = true 
-      @already_vote_message = 'Вы уже проголосовали' 
+      # @already_like_flag = true 
+      @already_like_message = 'Вы уже проголосовали' 
     else
-      @already_vote_flag = false 
-      @already_vote_message = 'Вы ещё не проголосовали' 
+      # @already_like_flag = false 
+      @already_like_message = 'Вы ещё не проголосовали' 
     end
   end
 
@@ -54,6 +54,10 @@ class PostsController < InheritedResources::Base
       format.html { redirect_to post_url, notice: 'posts was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def like_change
+
   end
 
   private

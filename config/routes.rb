@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :pictures
   resources :tags
   get 'main/index'
+  get 'post/like_change'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
