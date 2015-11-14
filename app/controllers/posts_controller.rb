@@ -1,5 +1,6 @@
 class PostsController < InheritedResources::Base
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
 
   def index
     @posts = Post.paginate(page: params[:page], :per_page => 10)
