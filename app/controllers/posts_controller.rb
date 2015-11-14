@@ -7,6 +7,15 @@ class PostsController < InheritedResources::Base
   end
 
   def show
+    @likes_count = PostLike.where(post_id: @post.id).count
+    
+    if PostLike.where(user_id: current_user.id, post_id: @post.id).count > 0
+      @already_vote_flag = true 
+      @already_vote_message = 'Вы уже проголосовали' 
+    else
+      @already_vote_flag = false 
+      @already_vote_message = 'Вы ещё не проголосовали' 
+    end
   end
 
   def new
