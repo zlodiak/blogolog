@@ -9,12 +9,14 @@ class PostsController < InheritedResources::Base
   def show
     @likes_count = PostLike.where(post_id: @post.id).count
     
-    if PostLike.where(user_id: current_user.id, post_id: @post.id).count > 0
-      # @already_like_flag = true 
-      @already_like_message = 'Вы уже проголосовали' 
-    else
-      # @already_like_flag = false 
-      @already_like_message = 'Вы ещё не проголосовали' 
+    if user_signed_in?
+      if PostLike.where(user_id: current_user.id, post_id: @post.id).count > 0
+        # @already_like_flag = true 
+        @already_like_message = 'Вы уже проголосовали' 
+      else
+        # @already_like_flag = false 
+        @already_like_message = 'Вы ещё не проголосовали' 
+      end
     end
   end
 
@@ -57,6 +59,15 @@ class PostsController < InheritedResources::Base
   end
 
   def like_change
+    like = PostLike.where(user_id: current_user.id, post_id: params[:post_id])
+
+    if like.count > 0
+      like.first.destroy
+    else
+      PostLike.create(user_id: current_user.id, post_id: params[:post_id])
+    end
+
+    redirect_to user_post_path(current_user, params[:post_id])
 
   end
 
@@ -70,7 +81,7 @@ class PostsController < InheritedResources::Base
     end
 
     def post_params
-      params.require(:post).permit(:title, :body)
+      params.require(:post).permit(:title, :body, :post_id)
     end
 end
 

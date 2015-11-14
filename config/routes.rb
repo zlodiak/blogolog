@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resources :tags
   get 'main/index'
   get 'post/like_change'
-  get 'all_posts' => 'posts#all_posts'#, as: 'all_posts'
-  #match 'all_posts', to: 'posts#all_posts', via: :get
+  get 'all_posts' => 'posts#all_posts'
+  post 'like_change' => 'posts#like_change', as: 'like_change'
 
   resources :users do
     resources :posts
