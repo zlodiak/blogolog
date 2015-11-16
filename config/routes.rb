@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :comments
   ActiveAdmin.routes(self)
   devise_for :users
   resources :messages, only: [:new, :create]
