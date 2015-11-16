@@ -1,0 +1,13 @@
+<div class="comment">
+  <div class="content">
+    <div><%= comment.content %></div>
+  </div>
+
+  <div class="actions">
+    <span><%= link_to 'reply', new_comment_path(:parent_id => comment) %></span>
+    <span><%= link_to 'Show', comment %></span>
+    <span><%= link_to 'Edit', edit_comment_path(comment) %></span>
+    <span><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+  </div>
+</div>
+<hr />

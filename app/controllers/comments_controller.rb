@@ -9,7 +9,7 @@ class CommentsController < InheritedResources::Base
   end
 
   def new
-    @comment = Comment.new
+    @comment = Comment.new(:parent_id => params[:parent_id])
   end
 
   def edit
