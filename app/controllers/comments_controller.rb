@@ -3,6 +3,7 @@ class CommentsController < InheritedResources::Base
 
   def index
     @comments = Comment.all
+    @comment = Comment.new
   end
 
   def show
