@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   belongs_to :user_status
   has_many :post_likes
+  has_many :comments
 end
