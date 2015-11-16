@@ -4,6 +4,7 @@ class CommentsController < InheritedResources::Base
   def index
     @comments = Comment.all
     @comment = Comment.new
+    # binding.pry
   end
 
   def show
@@ -18,6 +19,7 @@ class CommentsController < InheritedResources::Base
 
   def create
     @comment = Comment.new(comment_params)
+    @comment.user = current_user
 
     respond_to do |format|
       if @comment.save
