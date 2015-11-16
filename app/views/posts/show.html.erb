@@ -20,9 +20,42 @@
       <small>(<%= @already_like_message %>)</small>
       <%= submit_tag 'Проголосовать', class: 'btn-sm btn-info' %>
     <% end %>
-
-
   </p>
 <% end %>
+
+<br />
+<br />
+<br />
+
+<div class="comments_area">
+  <% if @comment %>
+    <%= form_for(@comment) do |f| %>
+      <% if @comment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+          <ul>
+          <% @comment.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= f.hidden_field :parent_id %>
+      <%= f.hidden_field :post_id, :value => @post.id %>
+
+      <div class="field">
+        <%= f.label :body %><br>
+        <%= f.text_area :body %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= nested_comments @comments.arrange(:order => :created_at) %>
+</div>
 
 

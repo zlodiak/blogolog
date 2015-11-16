@@ -20,10 +20,12 @@ class CommentsController < InheritedResources::Base
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user
+    @comment.post_id = comment_params[:post_id]
+    binding.pry
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'comment was successfully created.' }
+        format.html { redirect_to user_post_path(current_user.id, comment_params[:post_id]), notice: 'comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -58,7 +60,7 @@ class CommentsController < InheritedResources::Base
     end
 
     def comment_params
-      params.require(:comment).permit(:body, :parent_id)
+      params.require(:comment).permit(:body, :parent_id, :post_id)
     end
 end
 

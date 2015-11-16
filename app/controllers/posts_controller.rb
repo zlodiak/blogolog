@@ -7,6 +7,8 @@ class PostsController < InheritedResources::Base
   end
 
   def show
+    @comment = Comment.new
+    @comments = Comment.all
     @likes_count = PostLike.where(post_id: @post.id).count
     
     if user_signed_in?
