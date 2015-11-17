@@ -12,6 +12,8 @@ class CommentsController < InheritedResources::Base
 
   def new
     @comment = Comment.new(:parent_id => params[:parent_id])
+    @parent_id = params[:parent_id]
+    @post = Post.find(params[:post_id])
   end
 
   def edit
@@ -21,7 +23,8 @@ class CommentsController < InheritedResources::Base
     @comment = Comment.new(comment_params)
     @comment.user = current_user
     @comment.post_id = comment_params[:post_id]
-    binding.pry
+    p '------------------------------'
+    p comment_params[:post_id]
 
     respond_to do |format|
       if @comment.save

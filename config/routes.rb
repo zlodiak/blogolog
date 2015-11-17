@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :comments
+  
   ActiveAdmin.routes(self)
   devise_for :users
   resources :messages, only: [:new, :create]
@@ -14,7 +14,12 @@ Rails.application.routes.draw do
   resources :users do
     resources :posts
 
-  end  
+  end 
+
+  resources :posts do
+    resources :comments
+
+  end    
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
