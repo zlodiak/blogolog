@@ -8,6 +8,8 @@
 
 
 all_users = []
+all_posts = []
+all_comments = []
 
 # user_statuses fill
 UserStatus.create!(id: 1, title: 'active') 
@@ -19,12 +21,12 @@ PostStatus.create!(id: 2, title: 'closed')
 
 # admin user
 admin = User.create!(   
-          email: "ad@ad.ad",
-          password: 'qwertyui',
-          password_confirmation: 'qwertyui', 
-          user_status_id: 1,          
-          superadmin: true
-        ) 
+  email: "ad@ad.ad",
+  password: 'qwertyui',
+  password_confirmation: 'qwertyui', 
+  user_status_id: 1,          
+  superadmin: true
+) 
 all_users.push admin
 
 # regular user
@@ -53,17 +55,35 @@ messages_quantity.times do |n|
   ) 
 end
 
-# posts
+# posts and root-comments
 all_users.each do |user|
   user_post_quantity = rand(1..15)
+  root_comments_quantity = rand(1..5)
 
   user_post_quantity.times do |n|
-    Post.create!(   
-      title: Faker::Name.title,
-      body: Faker::Lorem.paragraph(20),
-      post_status_id: rand(1..2),
-      user_id: user.id
-    )   
+    post =  Post.create!(   
+              title: Faker::Name.title,
+              body: Faker::Lorem.paragraph(20),
+              post_status_id: rand(1..2),
+              user_id: user.id
+            )   
+
+    all_posts.push post    
+
+    root_comments_quantity.times do |n|
+      comment =  Comment.create!(   
+                  body: Faker::Lorem.paragraph(5),
+                  post_id: post.id,
+                  user_id: rand(1..users_quantity)
+                )  
+
+      all_comments.push comment 
+    end
   end
 end
 
+# comment likes
+#all_comments.each do |comment|
+#  like_comment_quantity = rand(0..1)
+
+#end
