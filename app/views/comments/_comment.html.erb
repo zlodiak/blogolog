@@ -3,13 +3,20 @@
     <%= comment.body %>
   </div>
 
-  <div class="actions panel-footer">
+  <div class="actions panel-footer" style="overflow: hidden;">
+    <div class="author_label_area pull-left">  
+      <strong>author:</strong>
+      <%= mail_to comment_author(comment.id).email, comment_author(comment.id).email %>
+    </div>
+
+    <div class="comments_likes_area pull-right">    
       <strong>likes:</strong>
       <span><%= comment_like(comment.id) %></span>
+    </div>
 
     <% if user_signed_in? %>
       <%= link_to 'reply', new_post_comment_path(:post_id => @post.id, :parent_id => comment), class: 'pull-right' %>
-    <% end %>
+    <% end %>    
   </div>
 </div>
 

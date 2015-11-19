@@ -8,4 +8,9 @@ module CommentsHelper
   def comment_like(comment_id)
     return CommentLike.where(comment_id: comment_id).count
   end
+
+  def comment_author(comment_id)
+    comment = Comment.find(comment_id)
+    return User.find(comment.user_id)
+  end
 end
