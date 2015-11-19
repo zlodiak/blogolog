@@ -5,7 +5,7 @@
 
   <div class="actions panel-footer">
       <strong>likes:</strong>
-      <span><%= comment_like %></span>
+      <span><%= comment_like(comment.id) %></span>
 
     <% if user_signed_in? %>
       <%= link_to 'reply', new_post_comment_path(:post_id => @post.id, :parent_id => comment), class: 'pull-right' %>

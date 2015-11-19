@@ -5,7 +5,7 @@ module CommentsHelper
     end.join.html_safe
   end  
 
-  def comment_like()
-    return 'qqq'
+  def comment_like(comment_id)
+    return CommentLike.where(comment_id: comment_id).count
   end
 end
