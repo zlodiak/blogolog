@@ -10,6 +10,8 @@
 all_users = []
 all_posts = []
 all_comments = []
+regular_users_quantity = 3
+messages_quantity = 35
 
 # user_statuses fill
 UserStatus.create!(id: 1, title: 'active') 
@@ -30,9 +32,7 @@ admin = User.create!(
 all_users.push admin
 
 # regular user
-users_quantity = 3
-
-users_quantity.times do |n|
+regular_users_quantity.times do |n|
   regular = User.create!(   
               email: "us#{n+1}@ad.ad",
               password: 'qwertyui',
@@ -44,8 +44,6 @@ users_quantity.times do |n|
 end
 
 # messages
-messages_quantity = 35
-
 messages_quantity.times do |n|
   Message.create!(   
     anon_author_name: Faker::Name.name,
@@ -74,7 +72,7 @@ all_users.each do |user|
       comment =  Comment.create!(   
                   body: Faker::Lorem.paragraph(5),
                   post_id: post.id,
-                  user_id: rand(1..users_quantity)
+                  user_id: rand(1..all_users.size)
                 )  
 
       all_comments.push comment 
@@ -83,7 +81,15 @@ all_users.each do |user|
 end
 
 # comment likes
-#all_comments.each do |comment|
-#  like_comment_quantity = rand(0..1)
+all_comments.each do |comment|
+  all_users.size.times do |user|
+      comment_exis_flag = rand(0..3)
 
-#end
+      if comment_exis_flag == 0
+        CommentLike.create!(   
+          comment_id: comment.id,
+          user_id: User.find(user + 1).id
+        )  
+      end
+  end
+end
