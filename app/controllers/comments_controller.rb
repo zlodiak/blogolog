@@ -1,4 +1,6 @@
 class CommentsController < InheritedResources::Base
+  before_action :authenticate_user!, only: [:create, :new]
+
   def new
     @comment = Comment.new(:parent_id => params[:parent_id])
     @parent_id = params[:parent_id]

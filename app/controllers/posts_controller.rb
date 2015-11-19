@@ -10,7 +10,13 @@ class PostsController < InheritedResources::Base
     @comment = Comment.new
     @comments = Comment.where(post_id: @post.id)#.paginate(page: params[:page], :per_page => 6)
     @likes_count = PostLike.where(post_id: @post.id).count
+
+    # generate comment ability notice
+    unless user_signed_in?
+      @notice_comment_ability = 'Добавлять комментарии могут только авторизованные пользователи'
+    end    
     
+    # generate like status notice
     if user_signed_in?
       if PostLike.where(user_id: current_user.id, post_id: @post.id).count > 0
         @already_like_message = 'Вы уже проголосовали' 

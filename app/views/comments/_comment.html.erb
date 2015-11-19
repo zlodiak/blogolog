@@ -2,9 +2,12 @@
   <div class="body panel-body">
     <%= comment.body %>
   </div>
-  <div class="actions panel-footer">
-    <%= link_to 'reply', new_post_comment_path(:post_id => @post.id, :parent_id => comment) %>
-  </div>
+
+  <% if user_signed_in? %>
+    <div class="actions panel-footer">
+      <%= link_to 'reply', new_post_comment_path(:post_id => @post.id, :parent_id => comment) %>
+    </div>
+  <% end %>
 </div>
 
 

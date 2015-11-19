@@ -28,7 +28,9 @@
 <br />
 
 <div class="comments_area">
-  <% if @comment %>
+  <%= @notice_comment_ability %>
+  
+  <% if @comment && user_signed_in? %>
     <%= form_for [@post, @comment] do |f| %>
       <% if @comment.errors.any? %>
         <div id="error_explanation">
