@@ -1,10 +1,10 @@
-<div class="comment">
-  <div class="body">
-    <div><%= comment.body %></div>
+<div class="comment panel panel-default">
+  <div class="body panel-body">
+    <%= comment.body %>
   </div>
-
-  <div class="actions">
-    <span><%= link_to 'reply', new_post_comment_path(:post_id => @post.id, :parent_id => comment) %></span>
+  <div class="actions panel-footer">
+    <%= link_to 'reply', new_post_comment_path(:post_id => @post.id, :parent_id => comment) %>
   </div>
 </div>
-<hr />
+
+

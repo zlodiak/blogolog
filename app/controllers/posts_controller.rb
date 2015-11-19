@@ -8,7 +8,7 @@ class PostsController < InheritedResources::Base
 
   def show
     @comment = Comment.new
-    @comments = Comment.where(post_id: @post.id).paginate(page: params[:page], :per_page => 10)
+    @comments = Comment.where(post_id: @post.id)#.paginate(page: params[:page], :per_page => 6)
     @likes_count = PostLike.where(post_id: @post.id).count
     
     if user_signed_in?

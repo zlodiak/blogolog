@@ -55,9 +55,11 @@
     <% end %>
   <% end %>
 
+  <br />
+
   <%= nested_comments @comments.arrange(:order => :created_at) %>
 
-  <%= will_paginate @comments %>
+  <%#= will_paginate @comments %>
 </div>
 
 
