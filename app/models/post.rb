@@ -2,7 +2,6 @@ class Post < ActiveRecord::Base
   belongs_to :post_status
   belongs_to :user
   has_many :post_likes
-  has_many :comment_likes
   has_many :comments
 
   validates :title, presence: true, length: { maximum:  600, minimum: 3 }
