@@ -10,8 +10,17 @@
     </div>
 
     <div class="comments_likes_area pull-right">    
-      <strong>likes:</strong>
-      <span><%= comment_like(comment.id) %></span>
+      <strong>likes:</strong>      
+
+      <%= form_tag(comment_like_change_path, method: :post, class: 'inline_block' )do %>
+        <%= hidden_field_tag(:comment_id, comment.id) %>
+        <span><%= comment_like(comment.id) %></span>
+
+        <% if user_signed_in? %>
+          <%= submit_tag 'Проголосовать', class: 'btn-sm btn-info' %>
+        <% end %>
+
+      <% end %>      
     </div>
 
     <% if user_signed_in? %>

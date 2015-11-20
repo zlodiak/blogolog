@@ -5,3 +5,7 @@
 .nested_comments .nested_comments .nested_comments .nested_comments {
   margin-left: 0;
 }
+
+.inline_block{
+  display: inline-block;
+}

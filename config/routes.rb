@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'post/like_change'
   get 'all_posts' => 'posts#all_posts'
   post 'like_change' => 'posts#like_change', as: 'like_change'
+  post 'comment_like_change' => 'comments#comment_like_change', as: 'comment_like_change'
 
   resources :users do
     resources :posts

@@ -19,9 +19,21 @@ class CommentsController < InheritedResources::Base
     end
   end
 
+  def comment_like_change
+    like = CommentLike.where(user_id: current_user.id, comment_id: params[:comment_id])
+
+    if like.count > 0
+      like.first.destroy
+    else
+      CommentLike.create(user_id: current_user.id, comment_id: params[:comment_id])
+    end
+
+    redirect_to :back
+  end
+
   private
     def comment_params
-      params.require(:comment).permit(:body, :parent_id, :post_id)
+      params.require(:comment).permit(:body, :parent_id, :post_id, :comment_id)
     end
 end
 

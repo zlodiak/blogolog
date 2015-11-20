@@ -15,15 +15,6 @@ class PostsController < InheritedResources::Base
     unless user_signed_in?
       @notice_comment_ability = 'Добавлять комментарии могут только авторизованные пользователи'
     end    
-    
-    # generate like status notice
-    if user_signed_in?
-      if PostLike.where(user_id: current_user.id, post_id: @post.id).count > 0
-        @already_like_message = 'Вы уже проголосовали' 
-      else
-        @already_like_message = 'Вы ещё не проголосовали' 
-      end
-    end
   end
 
   def new
@@ -73,8 +64,7 @@ class PostsController < InheritedResources::Base
       PostLike.create(user_id: current_user.id, post_id: params[:post_id])
     end
 
-    redirect_to user_post_path(current_user, params[:post_id])
-
+    redirect_to :back
   end
 
   def all_posts

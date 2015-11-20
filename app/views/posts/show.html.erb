@@ -19,7 +19,6 @@
     <span><%= @likes_count %> </span>
 
     <% if user_signed_in? %>
-      <small>(<%= @already_like_message %>)</small>
       <%= submit_tag 'Проголосовать', class: 'btn-sm btn-info' %>
     <% end %>
 
