@@ -10,6 +10,12 @@
   <%= @post.body %>
 </p>
 
+<div class="tags_area">
+  <strong>Tags: </strong>
+  <% @tags.each do |tag| %>
+    <%= link_to tag.title, tag_path(tag.id), class: 'tag_link' %>
+  <% end %>
+</div>
 
 <p>
   <strong>likes:</strong>

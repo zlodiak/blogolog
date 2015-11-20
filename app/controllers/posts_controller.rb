@@ -10,6 +10,7 @@ class PostsController < InheritedResources::Base
     @comment = Comment.new
     @comments = Comment.where(post_id: @post.id)#.paginate(page: params[:page], :per_page => 6)
     @post_likes_count = PostLike.where(post_id: @post.id).count
+    @tags = @post.tags
 
     # generate comment ability notice
     unless user_signed_in?

@@ -89,7 +89,7 @@ tags_quantity.times do |n|
   ) 
 end
 
-# post and tags
+# post and tags join table fill
 all_posts.each do |post|
   tags_quantity_for_post = rand(0..tags_quantity)
 
