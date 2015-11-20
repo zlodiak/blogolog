@@ -1,4 +1,10 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @tag.title %></h1>
 
-<%= link_to 'Edit', edit_tag_path(@tag) %> |
-<%= link_to 'Back', tags_path %>
+<% @posts.each do |post| %>
+  <div><%= link_to post.title, post_path(post.id) %></div>
+<% end %>
+
+
+<br />
+
+<%= will_paginate @posts %>

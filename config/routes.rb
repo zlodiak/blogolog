@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :messages, only: [:new, :create]
   resources :pictures
-  resources :tags
+  resources :tags, only: [:index, :show]
   get 'main/index'
   get 'post/like_change'
   get 'all_posts' => 'posts#all_posts'
