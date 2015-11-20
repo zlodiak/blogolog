@@ -14,9 +14,9 @@
 <p>
   <strong>likes:</strong>
 
-  <%= form_tag(like_change_path, method: :post, class: 'pull-left') do %>
+  <%= form_tag(posts_like_change_path, method: :post, class: 'pull-left') do %>
     <%= hidden_field_tag(:post_id, @post.id) %>
-    <span><%= @likes_count %> </span>
+    <span><%= @post_likes_count %> </span>
 
     <% if user_signed_in? %>
       <%= submit_tag 'Проголосовать', class: 'btn-sm btn-info' %>

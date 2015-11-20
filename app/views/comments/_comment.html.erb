@@ -12,7 +12,7 @@
     <div class="comments_likes_area pull-right">    
       <strong>likes:</strong>      
 
-      <%= form_tag(comment_like_change_path, method: :post, class: 'inline_block' )do %>
+      <%= form_tag(comments_like_change_path, method: :post, class: 'inline_block' )do %>
         <%= hidden_field_tag(:comment_id, comment.id) %>
         <span><%= comment_like(comment.id) %></span>
 

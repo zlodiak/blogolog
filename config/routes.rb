@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   get 'main/index'
   get 'post/like_change'
   get 'all_posts' => 'posts#all_posts'
-  post 'like_change' => 'posts#like_change', as: 'like_change'
-  post 'comment_like_change' => 'comments#comment_like_change', as: 'comment_like_change'
+  post 'posts_like_change' => 'posts#posts_like_change', as: 'posts_like_change'
+  post 'comments_like_change' => 'comments#comments_like_change', as: 'comments_like_change'
 
   resources :users do
     resources :posts

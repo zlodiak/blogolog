@@ -19,7 +19,7 @@ class CommentsController < InheritedResources::Base
     end
   end
 
-  def comment_like_change
+  def comments_like_change
     like = CommentLike.where(user_id: current_user.id, comment_id: params[:comment_id])
 
     if like.count > 0

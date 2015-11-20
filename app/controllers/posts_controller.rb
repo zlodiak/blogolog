@@ -9,7 +9,7 @@ class PostsController < InheritedResources::Base
   def show
     @comment = Comment.new
     @comments = Comment.where(post_id: @post.id)#.paginate(page: params[:page], :per_page => 6)
-    @likes_count = PostLike.where(post_id: @post.id).count
+    @post_likes_count = PostLike.where(post_id: @post.id).count
 
     # generate comment ability notice
     unless user_signed_in?
@@ -55,7 +55,7 @@ class PostsController < InheritedResources::Base
     end
   end
 
-  def like_change
+  def posts_like_change
     like = PostLike.where(user_id: current_user.id, post_id: params[:post_id])
 
     if like.count > 0
