@@ -89,7 +89,16 @@ tags_quantity.times do |n|
   ) 
 end
 
-# post ans tags
+# post and tags
+all_posts.each do |post|
+  tags_quantity_for_post = rand(0..tags_quantity)
+
+  tags_quantity_for_post.times do |n|
+    tag = Tag.find(n + 1)
+    tag.posts << post
+  end
+
+end
 
 # comment likes
 all_comments.each do |comment|
