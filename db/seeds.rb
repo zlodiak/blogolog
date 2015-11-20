@@ -45,13 +45,6 @@ regular_users_quantity.times do |n|
   all_users.push regular
 end
 
-# tags
-tags_quantity.times do |n|
-  Tag.create!(   
-    title: Faker::App.name
-  ) 
-end
-
 # messages
 messages_quantity.times do |n|
   Message.create!(   
@@ -88,6 +81,15 @@ all_users.each do |user|
     end
   end
 end
+
+# tags
+tags_quantity.times do |n|
+  Tag.create!(   
+    title: Faker::App.name
+  ) 
+end
+
+# post ans tags
 
 # comment likes
 all_comments.each do |comment|
