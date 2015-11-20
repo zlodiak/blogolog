@@ -10,8 +10,10 @@
 all_users = []
 all_posts = []
 all_comments = []
+all_tags = []
 regular_users_quantity = 3
 messages_quantity = 35
+tags_quantity = 25
 
 # user_statuses fill
 UserStatus.create!(id: 1, title: 'active') 
@@ -41,6 +43,13 @@ regular_users_quantity.times do |n|
             ) 
 
   all_users.push regular
+end
+
+# tags
+tags_quantity.times do |n|
+  Tag.create!(   
+    title: Faker::App.name
+  ) 
 end
 
 # messages
@@ -93,3 +102,4 @@ all_comments.each do |comment|
       end
   end
 end
+
