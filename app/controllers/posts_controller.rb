@@ -1,6 +1,7 @@
 class PostsController < InheritedResources::Base
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
+  before_action :owner_post_check, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.where(id: params[:id]).paginate(page: params[:page], :per_page => 10)
@@ -49,10 +50,8 @@ class PostsController < InheritedResources::Base
   end
 
   def destroy
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to post_url, notice: 'posts was successfully destroyed.' }
-      format.json { head :no_content }
+    if @post.destroy
+      redirect_to all_posts_path, notice: 'posts was successfully destroyed.'
     end
   end
 
@@ -69,7 +68,7 @@ class PostsController < InheritedResources::Base
   end
 
   def all_posts
-    @posts = Post.paginate(page: params[:page], :per_page => 10)
+    @posts = Post.paginate(page: params[:page], :per_page => 10).order(created_at: :desc)
     @post = Post.new
   end
 
@@ -80,6 +79,11 @@ class PostsController < InheritedResources::Base
 
     def post_params
       params.require(:post).permit(:title, :body, :post_id)
+    end
+
+
+    def owner_post_check
+      error_403 unless current_user.id == @post.user_id   
     end
 end
 

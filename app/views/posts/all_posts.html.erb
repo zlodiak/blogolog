@@ -13,6 +13,8 @@
       <th>Title</th>
       <th>Body</th>
       <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -20,8 +22,10 @@
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.title %></td>
-        <td><%= post.body %></td>
+        <td><%= truncate(post.body, length: 170)  %></td>
         <td><%= link_to 'Show', user_post_path(post.user_id, post.id) %></td>
+        <td><%= link_to 'edit', edit_user_post_path(post.user_id, post.id) if user_signed_in? %></td>
+        <td><%= link_to 'delete', user_post_path(post.user_id, post.id), method: :delete, data: { confirm: 'Are you sure?' } if user_signed_in? %></td>
       </tr>
     <% end %>
   </tbody>

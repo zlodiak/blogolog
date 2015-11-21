@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
     end
   end  
 
+  def error_403
+    render :file => "#{Rails.root}/public/403", :status => 403 
+  end
+
+  def error_404
+    render :file => "#{Rails.root}/public/404", :status => 404
+  end  
+
   protected
     def configure_permitted_parameters
       devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:password, :password_confirmation,:current_password,:email,:title) }
