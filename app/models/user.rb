@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :posts, dependent: :destroy
   belongs_to :user_status
-  has_many :post_likes
-  has_many :comment_likes
-  has_many :comments
+  has_many :post_likes, dependent: :destroy
+  has_many :comment_likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validates :title, presence: true, length: { maximum:  40, minimum: 2 }
 end
