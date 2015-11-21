@@ -13,5 +13,28 @@ ActiveAdmin.register Post do
 #   permitted
 # end
 
+  index do
+    selectable_column
+    id_column
+    column :title
+    column :user
+    column :created_at
+    column :updated_at
+    actions
+  end
+
+  filter :title
+  filter :user_id
+  filter :created_at
+  filter :updated_at
+
+  form do |f|
+    f.inputs "Admin Details" do
+      f.input :title
+      f.input :body
+      f.input :user     
+    end
+    f.actions
+  end  
 
 end
