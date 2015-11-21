@@ -3,14 +3,15 @@ ActiveAdmin.register User do
     selectable_column
     id_column
     column :email
-    column :current_sign_in_at
-    column :sign_in_count
+    column :title
     column :created_at
+    column :updated_at
     column :superadmin
     actions
   end
 
   filter :email
+  filter :title
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
@@ -19,11 +20,12 @@ ActiveAdmin.register User do
     f.inputs "Admin Details" do
       f.input :superadmin
       f.input :email
+      f.input :title
       f.input :password
       f.input :password_confirmation
     end
     f.actions
   end
 
-  permit_params :email, :password, :password_confirmation, :superadmin
+  permit_params :email, :password, :password_confirmation, :superadmin, :title
 end

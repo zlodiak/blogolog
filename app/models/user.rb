@@ -9,4 +9,6 @@ class User < ActiveRecord::Base
   has_many :post_likes
   has_many :comment_likes
   has_many :comments
+
+  validates :title, presence: true, length: { maximum:  40, minimum: 2 }
 end
