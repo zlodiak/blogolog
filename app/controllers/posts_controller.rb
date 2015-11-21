@@ -4,7 +4,7 @@ class PostsController < InheritedResources::Base
   before_action :owner_post_or_admin_check, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.where(id: params[:id]).paginate(page: params[:page], :per_page => 10)
+    @posts = Post.where(id: params[:id], post_status_id: 1).paginate(page: params[:page], :per_page => 10)
   end
 
   def show
@@ -64,13 +64,13 @@ class PostsController < InheritedResources::Base
   end
 
   def all_posts
-    @posts = Post.paginate(page: params[:page], :per_page => 10).order(created_at: :desc)
+    @posts = Post.where(post_status_id: 1).paginate(page: params[:page], :per_page => 10).order(created_at: :desc)
     @post = Post.new
   end
 
   private
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.where(id: params[:id], post_status_id: 1).first
     end
 
     def post_params
