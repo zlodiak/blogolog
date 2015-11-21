@@ -33,6 +33,8 @@ ActiveAdmin.register Message do
       f.input :email
       f.input :title
       f.input :body
+      f.input :anon_author_name
+      f.input :user_author_id
     end
     f.actions
   end  

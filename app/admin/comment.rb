@@ -19,8 +19,11 @@ ActiveAdmin.register Comment, as: "PostComment" do
       f.input :body   
       f.input :user   
       f.input :post   
+      f.input :ancestry   
     end
     f.actions
   end 
+
+  permit_params :body, :user_id, :post_id
 
 end
