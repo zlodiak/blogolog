@@ -6,7 +6,8 @@
   <div class="actions panel-footer" style="overflow: hidden;">
     <div class="author_label_area pull-left">  
       <strong>author:</strong>
-      <%= mail_to comment_author(comment.id).email, comment_author(comment.id).email %>
+      <%= comment.user.title %> 
+      <small>(<%= mail_to comment_author(comment.id).email, comment_author(comment.id).email %>)</small>
     </div>
 
     <div class="comments_likes_area pull-right">    
