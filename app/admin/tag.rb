@@ -33,4 +33,5 @@ ActiveAdmin.register Tag do
     f.actions
   end 
 
+  permit_params :title
 end

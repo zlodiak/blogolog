@@ -37,4 +37,5 @@ ActiveAdmin.register Post do
     f.actions
   end  
 
+  permit_params :title, :body, :user_id
 end
