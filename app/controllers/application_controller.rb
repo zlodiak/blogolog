@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
     render :file => "#{Rails.root}/public/404", :status => 404
   end  
 
+  def admin_check
+    error_403 unless current_user.superadmin == true
+  end   
+
   protected
     def configure_permitted_parameters
       devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:password, :password_confirmation,:current_password,:email,:title) }

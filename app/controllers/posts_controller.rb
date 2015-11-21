@@ -1,7 +1,7 @@
 class PostsController < InheritedResources::Base
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
-  before_action :owner_post_check, only: [:edit, :update, :destroy]
+  before_action :owner_post_or_admin_check, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.where(id: params[:id]).paginate(page: params[:page], :per_page => 10)
@@ -77,9 +77,10 @@ class PostsController < InheritedResources::Base
       params.require(:post).permit(:title, :body, :post_id)
     end
 
-
-    def owner_post_check
-      error_403 unless current_user.id == @post.user_id   
-    end
+    def owner_post_or_admin_check
+      unless (current_user.id == @post.user_id) || (current_user.superadmin == true)
+        error_403 unless current_user.id == @post.user_id   
+      end
+    end 
 end
 
