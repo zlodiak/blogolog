@@ -70,6 +70,7 @@ class PostsController < InheritedResources::Base
 
   def all_posts
     @posts = Post.paginate(page: params[:page], :per_page => 10)
+    @post = Post.new
   end
 
   private
