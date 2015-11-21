@@ -83,6 +83,10 @@ class PostsController < InheritedResources::Base
     end
 
     def owner_post_or_admin_check
+      p '--------------------------'
+      p current_user.id == @post.user_id
+      p current_user.id
+      p @post.user_id
       unless (current_user.id == @post.user_id) || (current_user.superadmin == true)
         error_403 unless current_user.id == @post.user_id   
       end
