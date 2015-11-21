@@ -38,15 +38,11 @@ class PostsController < InheritedResources::Base
   end
 
   def update
-    respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'posts was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
+        redirect_to user_post_path(current_user.id, @post.id), notice: 'posts was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        render :edit
       end
-    end
   end
 
   def destroy
