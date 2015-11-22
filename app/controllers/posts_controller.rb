@@ -71,11 +71,13 @@ class PostsController < InheritedResources::Base
   def all_posts
     @posts = Post.where(post_status_id: 1).paginate(page: params[:page], :per_page => 10).order(created_at: :desc)
     @post = Post.new
+    @tags = Tag.all
   end
 
   private
     def set_post
       @post = Post.where(id: params[:id], post_status_id: 1).first
+      error_404 unless @post
     end
 
     def post_params
@@ -83,10 +85,6 @@ class PostsController < InheritedResources::Base
     end
 
     def owner_post_or_admin_check
-      p '--------------------------'
-      p current_user.id == @post.user_id
-      p current_user.id
-      p @post.user_id
       unless (current_user.id == @post.user_id) || (current_user.superadmin == true)
         error_403 unless current_user.id == @post.user_id   
       end

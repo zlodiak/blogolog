@@ -15,10 +15,18 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+
   <div class="field">
     <%= f.label :body %><br>
     <%= f.text_area :body %>
   </div>
+
+  <div class="tags_area">
+    <% @tags.each do |tag| %>
+      <%= tag.title %>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
