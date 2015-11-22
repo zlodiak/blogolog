@@ -111,8 +111,8 @@ class PostsController < InheritedResources::Base
           end
         else
           begin
-          tag = Tag.create(title: tagname.downcase)
-          tag.posts << post
+            tag = Tag.create(title: tagname.downcase)
+            tag.posts << post
           rescue
             logger.debug 'query for create tag and add association posts_tags is failed'
             raise 'add_new_tags error'
