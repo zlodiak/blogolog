@@ -2,12 +2,17 @@
 
 <h1>Listing Tags</h1>
 
-<% @tags.each do |tag| %>
-  <div>
-    <%= link_to tag.title, tag_path(tag.id) %>
-  </div>
+<% if @tags.count != 0 %>
+  <% @tags.each do |tag| %>
+    <div>
+      <%= link_to tag.title, tag_path(tag.id) %>
+      <span class="count"> x<%= tag.posts.count %></span>  
+    </div>
+  <% end %>
+
+  <br />
+
+  <%= will_paginate @tags %>
+<% else %>
+  <div class="row"><%= 'Нет тегов' %></div>
 <% end %>
-
-<br />
-
-<%= will_paginate @tags %>
