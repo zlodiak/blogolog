@@ -24,6 +24,7 @@ class PostsController < InheritedResources::Base
   end
 
   def edit
+    @tags = @post.tags
   end
 
   def create
@@ -40,6 +41,8 @@ class PostsController < InheritedResources::Base
 
   def update
       if @post.update(post_params)
+        add_new_tags(@post) if params[:tagnames]
+        destroy_tags(params['delete_tags'], @post) if params['delete_tags']        
         redirect_to user_post_path(current_user.id, @post.id), notice: 'posts was successfully updated.'
       else
         render :edit
@@ -103,6 +106,13 @@ class PostsController < InheritedResources::Base
           tag.posts << post
         end
       end
-    end    
+    end  
+
+    def destroy_tags(tags,post)
+      tags.each do |tag|
+        sql = "delete from 'posts_tags' where post_id = #{post.id} and tag_id = #{tag}"
+        records_array = ActiveRecord::Base.connection.execute(sql)    
+      end
+    end        
 end
 
