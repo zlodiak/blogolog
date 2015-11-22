@@ -40,13 +40,15 @@ class PostsController < InheritedResources::Base
   end
 
   def update
-      if @post.update(post_params)
-        add_new_tags(@post) if params[:tagnames]
-        destroy_tags(params['delete_tags'], @post) if params['delete_tags']        
-        redirect_to user_post_path(current_user.id, @post.id), notice: 'posts was successfully updated.'
-      else
-        render :edit
-      end
+    begin  
+      @post.update(post_params)
+      add_new_tags(@post) if params[:tagnames]
+      destroy_tags(params['delete_tags'], @post) if params['delete_tags']   
+      redirect_to user_post_path(current_user.id, @post.id), notice: 'posts was successfully updated.'
+    rescue  
+      logger.debug 'update post is failed'
+      render :edit
+    end
   end
 
   def destroy(real_delete = false)
@@ -99,11 +101,22 @@ class PostsController < InheritedResources::Base
         tag = Tag.find_by(title: tagname.downcase)
         if tag
           sql = "select * from 'posts_tags' where post_id = #{post.id} and tag_id = #{tag.id}"
-          records_array = ActiveRecord::Base.connection.execute(sql)     
-          tag.posts << post if records_array.count == 0
+
+          begin
+            records_array = ActiveRecord::Base.connection.execute(sql)     
+            tag.posts << post if records_array.count == 0
+          rescue
+            logger.debug 'query for add association posts_tags is failed'
+            raise 'add_new_tags error'
+          end
         else
+          begin
           tag = Tag.create(title: tagname.downcase)
           tag.posts << post
+          rescue
+            logger.debug 'query for create tag and add association posts_tags is failed'
+            raise 'add_new_tags error'
+          end
         end
       end
     end  
@@ -111,7 +124,11 @@ class PostsController < InheritedResources::Base
     def destroy_tags(tags,post)
       tags.each do |tag|
         sql = "delete from 'posts_tags' where post_id = #{post.id} and tag_id = #{tag}"
-        records_array = ActiveRecord::Base.connection.execute(sql)    
+
+        unless ActiveRecord::Base.connection.execute(sql)  
+          logger.debug 'query for delete tags is failed'
+          raise 'destroy_tags error'          
+        end
       end
     end        
 end
