@@ -22,9 +22,8 @@
   </div>
 
   <div class="tags_area">
-    <% @tags.each do |tag| %>
-      <%= tag.title %>
-    <% end %>
+    <%= text_field_tag 'tagnames', nil, class: 'tagnames' %>
+    <div class="help_phrase">Введите теги через запятую</div>
   </div>
 
   <div class="actions">

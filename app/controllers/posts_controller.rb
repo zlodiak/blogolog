@@ -30,7 +30,8 @@ class PostsController < InheritedResources::Base
     @post = Post.new(post_params)
     @post.user = current_user
 
-    if @post.save      
+    if @post.save    
+      add_new_tags(@post)  
       redirect_to @post, notice: 'posts was successfully created.'
     else
       render :new 
@@ -71,7 +72,6 @@ class PostsController < InheritedResources::Base
   def all_posts
     @posts = Post.where(post_status_id: 1).paginate(page: params[:page], :per_page => 10).order(created_at: :desc)
     @post = Post.new
-    @tags = Tag.all
   end
 
   private
@@ -81,7 +81,7 @@ class PostsController < InheritedResources::Base
     end
 
     def post_params
-      params.require(:post).permit(:title, :body, :post_id)
+      params.require(:post).permit(:title, :body, :post_id, :tagnames)
     end
 
     def owner_post_or_admin_check
@@ -89,5 +89,20 @@ class PostsController < InheritedResources::Base
         error_403 unless current_user.id == @post.user_id   
       end
     end 
+
+    def add_new_tags(post)
+      tagnames = params[:tagnames].split(/[, \.?!]+/) 
+      tagnames.each do |tagname|
+        tag = Tag.find_by(title: tagname.downcase)
+        if tag
+          sql = "select * from 'posts_tags' where post_id = #{post.id} and tag_id = #{tag.id}"
+          records_array = ActiveRecord::Base.connection.execute(sql)     
+          tag.posts << post if records_array.count == 0
+        else
+          tag = Tag.create(title: tagname.downcase)
+          tag.posts << post
+        end
+      end
+    end    
 end
 
