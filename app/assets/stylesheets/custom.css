@@ -18,18 +18,19 @@
   top: 20px;
   right: 20px;
   width: 200px;
-  background: cyan;
   border-radius: 5px;
 }
 
   .notice_area .alert{
     margin: 0 !important;
+    background: cyan;
   }
 
   .notice_area .alert-error{
     background: red;
   }
 
+  .notice_area .alert-notice,
   .notice_area .alert-success{
     background: lime;
   } 

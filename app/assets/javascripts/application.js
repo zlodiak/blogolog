@@ -14,3 +14,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+function hideAlert(){
+  $('#alertMessage').fadeOut(1000)
+}
+
+setTimeout(hideAlert, 3000)
