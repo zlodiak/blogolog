@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div><%= link_to 'edit', edit_user_post_path(@post.user_id, @post.id) if user_signed_in? %></div>
 <div><%= link_to 'delete', user_post_path(@post.user_id, @post.id), method: :delete, data: { confirm: 'Are you sure?' } if user_signed_in? %></div>
 
