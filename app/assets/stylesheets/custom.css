@@ -26,6 +26,7 @@
     background: cyan;
   }
 
+  .notice_area .alert-alert,
   .notice_area .alert-error{
     background: red;
   }

@@ -76,11 +76,13 @@ class PostsController < InheritedResources::Base
 
   def destroy(real_delete = false)
     if @post.update(post_status_id: 2)
-      redirect_to all_posts_path, notice: 'posts was successfully destroyed.'
+      flash[:success] = 'Пост успешно удалён'
+      redirect_to all_posts_path
     end
 
     if real_delete == true
       @post.destroy
+      flash[:success] = 'Пост успешно удалён из БД'
       redirect_to all_posts_path, notice: 'posts was successfully destroyed(erased from DB).'
     end
   end

@@ -13,7 +13,8 @@ class CommentsController < InheritedResources::Base
     @comment.post_id = comment_params[:post_id]
 
     if @comment.save
-      redirect_to user_post_path(current_user.id, comment_params[:post_id]), notice: 'comment was successfully created.'
+      flash[:success] = 'Комментарий успешно добавлен'
+      redirect_to user_post_path(current_user.id, comment_params[:post_id])
     else
       render :new
     end
@@ -23,8 +24,10 @@ class CommentsController < InheritedResources::Base
     like = CommentLike.where(user_id: current_user.id, comment_id: params[:comment_id])
 
     if like.count > 0
+      flash[:success] = 'Лайк удалён'
       like.first.destroy
     else
+      flash[:success] = 'Лайк добавлен'
       CommentLike.create(user_id: current_user.id, comment_id: params[:comment_id])
     end
 
