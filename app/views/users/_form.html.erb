@@ -1,0 +1,31 @@
+<%= form_for @user do |f| %>
+  <div class="row edit_form_profile">
+    <div class="form-group col-xs-12">
+      <div class="row">
+        <div class="col-xs-12 col-sm-3 title"><span class="label_block">Имя</span></div>
+        <div class="col-xs-12 col-sm-9 value"><%= f.text_field :title, class: "form-control user_name" %></div>
+      </div>
+    </div>
+
+    <div class="form-group col-xs-12">
+      <div class="row">
+        <div class="col-xs-12 col-sm-3 title"><span class="label_block">Email</span></div>
+        <div class="col-xs-12 col-sm-9 value"><%= f.text_field :email, class: "form-control user_email" %></div>
+      </div>    
+    </div>            
+
+    <div class="form-group col-xs-12">
+      <div class="row">
+        <div class="col-xs-12 update_account_button">
+          <%= f.submit 'Сохранить изменения', class: 'btn btn-default pull-right' %>
+        </div>      
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-6 delete_account_button">
+    <%= button_to "Удалить аккаунт", user_path, :data => { :confirm => "Are you sure?" }, :method => :delete, class: 'btn btn-danger pull-left' %>
+  </div>  
+</div>  
