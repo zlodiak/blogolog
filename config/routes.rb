@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post 'posts_like_change' => 'posts#posts_like_change', as: 'posts_like_change'
   post 'comments_like_change' => 'comments#comments_like_change', as: 'comments_like_change'
 
-  resources :users do
+  resources :users, only: [:index, :show, :edit, :update, :destroy] do
     resources :posts
 
   end 

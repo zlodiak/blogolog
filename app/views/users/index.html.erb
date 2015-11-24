@@ -3,10 +3,9 @@
 
 <% @users.each do |user| %>
   <article class="article row">
-    <div class="col-xs-6 col-sm-3 name name_link"><%= link_to user.title, user_path(user) if user.title %></div>
-    <div class="col-xs-6 col-sm-3 status"><%= user.user_status.title if user.user_status_id %></div>
-    <div class="col-xs-6 col-sm-3 created"><%= l(user.created_at, format: "%e %b %Y, %H:%I") if user.created_at %></div>
-    <div class="col-xs-6 col-sm-3 last_login"><%= l(user.last_sign_in_at, format: "%e %b %Y, %H:%I") if user.last_sign_in_at %></div>
+    <div class="col-xs-4 col-sm-4 name name_link"><%= link_to user.title, user_path(user) if user.title %></div>
+    <div class="col-xs-4 col-sm-4 created"><%= l(user.created_at, format: "%e %b %Y, %H:%I") if user.created_at %></div>
+    <div class="col-xs-4 col-sm-4 last_login"><%= l(user.last_sign_in_at, format: "%e %b %Y, %H:%I") if user.last_sign_in_at %></div>
   </article>
 <% end %>
 
