@@ -36,6 +36,13 @@
       </div>  
     <% end %>  
 
+    <% if @user.info %>
+      <div class="row">
+        <div class="col-xs-12 col-sm-3 title">Дополнительная информация</div>
+        <div class="col-xs-12 col-sm-9 value"><%= @user.info %></div>
+      </div> 
+    <% end %>       
+
     <% if @user == current_user %>
       <div class="row">
         <div class="col-xs-12 edit_button"><%= link_to 'Редактировать', edit_user_path(@user), class: 'btn btn-default pull-right' %></div>
