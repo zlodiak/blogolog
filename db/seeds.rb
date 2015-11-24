@@ -26,6 +26,7 @@ PostStatus.create!(id: 2, title: 'closed')
 # admin user
 admin = User.create!(   
   title: "admin",
+  info: Faker::Lorem.paragraph(10),
   email: "ad@ad.ad",
   password: 'qwertyui',
   password_confirmation: 'qwertyui', 
@@ -38,6 +39,7 @@ all_users.push admin
 regular_users_quantity.times do |n|
   regular = User.create!(   
               title: Faker::Name.name,
+              info: Faker::Lorem.paragraph(10),
               email: "us#{n+1}@ad.ad",
               password: 'qwertyui',
               user_status_id: 1,

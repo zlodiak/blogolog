@@ -7,7 +7,7 @@
     <div class="col-sx-12 col-sm-6">
       <h3 class="pull-right">
         <% if user_signed_in? %>
-            <span>Здравствуйте, <%= current_user.title %></span>
+            <span>Здравствуйте, <%= link_to current_user.title, user_path(current_user.id) %></span>
             <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
         <% else %>
             <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
