@@ -7,11 +7,25 @@ class ApplicationController < ActionController::Base
 
   # protect_from_forgery
 
+  def authenticate_active_user!
+    authenticate_user!
+    p 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    p current_user.user_status_id == 2
+    p 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    p current_user.user_status_id
+    p 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+
+    if current_user.user_status_id == 2
+      flash[:alert] = "Пользователя не существует"
+      redirect_to new_user_session_path
+    end    
+  end
+
   def authenticate_active_admin_user!
     authenticate_user!
     unless current_user.superadmin?
       flash[:alert] = "Доступ только зарегистрироавнным пользователям!"
-      redirect_to root_path
+      redirect_to new_user_session_path
     end
   end  
 

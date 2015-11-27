@@ -1,6 +1,6 @@
 class PostsController < InheritedResources::Base
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
+  before_action :authenticate_active_user!, only: [:create, :edit, :update, :destroy]
   before_action :owner_post_or_admin_check, only: [:edit, :update, :destroy]
 
   def index
@@ -83,7 +83,7 @@ class PostsController < InheritedResources::Base
     if real_delete == true
       @post.destroy
       flash[:success] = 'Пост успешно удалён из БД'
-      redirect_to all_posts_path, notice: 'posts was successfully destroyed(erased from DB).'
+      redirect_to all_posts_path
     end
   end
 

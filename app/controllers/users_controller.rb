@@ -21,7 +21,17 @@ class UsersController < ApplicationController
     end     
   end
 
-  def destroy
+  def destroy(real_delete = false)
+    if @user.update(user_status_id: 2)
+      flash[:success] = 'Аккаунт пользователя удалён'
+      redirect_to new_user_session_path
+    end
+
+    if real_delete == true
+      @user.destroy
+      flash[:success] = 'Аккаунт пользователя удалён из БД'
+      redirect_to new_user_session_path
+    end
   end
 
   private
